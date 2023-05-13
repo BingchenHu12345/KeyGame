@@ -18,6 +18,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -44,7 +45,7 @@ public class Key extends Application
     String secondI = "press 2 to buy ultimate sped, it costs 100 money/kills";
     double speed=0.5;
     int moveSpeed = 2;
-    int Hp=200000;
+    int Hp=300;
     int killCount=0;
     boolean move = false;
     boolean shop = false;
@@ -55,6 +56,8 @@ public class Key extends Application
     double pBulletD=10;
     public static double playerAngle=0;
 
+    public static boolean help=false;
+
     @Override
     public void start(Stage stage) throws IOException
     {
@@ -63,6 +66,13 @@ public class Key extends Application
        Timeline tl=new Timeline(new KeyFrame(Duration.millis(16.0 + (2.0 / 3.0)), e ->run(gc)));
        tl.setCycleCount(Animation.INDEFINITE);
        canvas.setFocusTraversable(true);
+
+       File saveFile=new File("Save.ser");
+       if(!saveFile.exists())
+       {
+           help=true;
+
+       }
 
        canvas.setOnKeyPressed(e->
        {
@@ -86,6 +96,9 @@ public class Key extends Application
 
 
                //playery-=moveSpeed;
+           }
+           if(e.getCode()==KeyCode.P){
+               help=!help;
            }
            if (e.getCode()== KeyCode.S)
            {
@@ -193,6 +206,24 @@ public class Key extends Application
         return random.nextDouble(max - min) + min;
     }
     public void run(GraphicsContext gc) {
+
+        if(help){
+            gc.setFill(Color.BLACK);
+            gc.fillRect(0, 0, 3000, 3000);
+            gc.setFill(Color.WHITE);
+            gc.fillText("Hold space to shoot", 50,50);
+            gc.fillText("Press Z for special (Loads every 10 seconds)", 75,65);
+            gc.fillText("Command too go too0 shop, you need more than 1 kill", 100,80);
+            gc.fillText("delete too save", 125,95);
+            gc.fillText("return to load ur file", 150,110);
+            gc.fillText("Q too sprint", 175,125);
+            gc.fillText("press P too get out", 200,140);
+
+
+
+            return;
+        }
+
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, 3000, 3000);
         gc.setFill(Color.GREEN);
