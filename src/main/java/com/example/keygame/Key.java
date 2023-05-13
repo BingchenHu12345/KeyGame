@@ -51,6 +51,8 @@ public class Key extends Application
     boolean shoot=false;
     boolean ult=false;
     long lastUlt=frameCount;
+
+    double pBulletD=10;
     public static double playerAngle=0;
 
     @Override
@@ -121,7 +123,8 @@ public class Key extends Application
                killCount-=100;
                secondI="YOU BOUGHT ultymite sped";
                speed=0.1;
-               //TODO:make damage a var
+               pBulletD=5;
+
            }
            if (e.getCode()== KeyCode.SPACE)
            {
@@ -264,7 +267,6 @@ public class Key extends Application
                 if (getD(enemyT.enemyX, playerx, enemyT.enemyY, playery) < 20) {
                     Hp -= 10;
                     enemyT.hp -= 1;
-                    //TODO: deal damage to enemy when contact instead of instakill
                     if (enemyT.hp <= 0) {
 
                         enemies.remove(enemyT);
