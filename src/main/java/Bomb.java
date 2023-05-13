@@ -1,9 +1,32 @@
 import com.example.keygame.Bullet;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Bomb extends Bullet
 {
 
-    public Bomb(double x, double y, double velX, double velY) {
-        super(x, y, velX, velY);
+    int boom;
+
+
+    public Bomb(double x, double y) {
+        super(x, y, 0, 0);
+        boom=300;
+    }
+
+
+    @Override
+    public void draw(GraphicsContext gc) {
+//        super.draw(gc);
+        if(boom%5<=2){
+        gc.setFill(Color.RED);
+        }
+        else{gc.setFill(Color.WHITE);}
+
+        gc.fillOval(bulletx,bullety,50,50);
+    }
+
+    @Override
+    public void tick() {
+        boom-=1;
     }
 }
