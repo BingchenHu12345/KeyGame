@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Bullet
 {
-    double bulletx;
-    double bullety;
+    public double bulletx;
+    public double bullety;
 
     double bXvel;
     double bYvel;
