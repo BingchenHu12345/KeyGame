@@ -1,3 +1,5 @@
+package com.example.keygame;
+
 import com.example.keygame.Bullet;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -17,7 +19,7 @@ public class Bomb extends Bullet
     @Override
     public void draw(GraphicsContext gc) {
 //        super.draw(gc);
-        if(boom%5<=2){
+        if(boom%10<=2){
         gc.setFill(Color.RED);
         }
         else{gc.setFill(Color.WHITE);}

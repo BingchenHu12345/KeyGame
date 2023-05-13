@@ -124,6 +124,9 @@ public class Key extends Application
                System.out.println(save);
                save.save();
            }
+           if(e.getCode()==KeyCode.X){
+               bullets.add(new Bomb(playerx,playery));
+           }
            if(e.getCode()==KeyCode.DIGIT1&&shop&&killCount>=10)
            {
                killCount-=10;
@@ -329,6 +332,17 @@ public class Key extends Application
                 bullet1.draw(gc);
 
                 bullet1.tick();
+
+                if(bullet1 instanceof Bomb)
+                {
+                    if(((Bomb) bullet1).boom<=0){
+                        //TODO:MAKE ARRAYLIOST REMOVE AND DAMAGE
+                        continue;
+                    }
+
+                    continue;
+                }
+
                 if (bullet1.bulletx > 500 || bullet1.bullety > 500 || bullet1.bullety < 0 || bullet1.bulletx < 0) {
                     bullets.remove(k);
 //                    break;
