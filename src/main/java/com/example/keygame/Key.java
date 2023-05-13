@@ -321,7 +321,7 @@ public class Key extends Application
 
                             bullets.remove(k);
                         }
-                        enemy1.hp -= 10;
+                        enemy1.hp -= pBulletD;
                         if (enemy1.hp <= 0) {
                             enemies.remove(j);
                             System.out.println(killCount);
