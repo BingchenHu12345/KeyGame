@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
 
 // want W to move toward the arrow
 public class Key extends Application
@@ -52,6 +53,8 @@ public class Key extends Application
     boolean shoot=false;
     boolean ult=false;
     long lastUlt=frameCount;
+
+    long lastBomb=frameCount;
 
     double pBulletD=10;
     public static double playerAngle=0;
@@ -124,7 +127,8 @@ public class Key extends Application
                System.out.println(save);
                save.save();
            }
-           if(e.getCode()==KeyCode.X){
+           if(e.getCode()==KeyCode.X&&frameCount-lastBomb >= Settings.bombCooldown){
+               lastBomb=frameCount;
                bullets.add(new Bomb(playerx,playery));
            }
            if(e.getCode()==KeyCode.DIGIT1&&shop&&killCount>=10)
@@ -337,16 +341,16 @@ public class Key extends Application
                 if(bullet1 instanceof Bomb)
                 {
                     if(((Bomb) bullet1).boom<=0){
-                        System.out.println("H");
+
 
                         //damage all nearby enemies
                         for(int i=0;i<enemies.size();i++)
                         {
                             double dist=getD(bullet1.bulletx,enemies.get(i).enemyX,bullet1.bullety,enemies.get(i).enemyY);
                             if(dist<=Settings.bombRange){
-                                System.out.println("uuu");
+
                                 enemies.get(i).hp-=Settings.bombDamage;
-                                System.out.println(enemies.get(i).hp);
+
                             }
 
                         }
