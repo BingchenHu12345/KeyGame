@@ -46,7 +46,7 @@ public class Key extends Application
     String secondI = "press 2 to buy ultimate sped, it costs 100 money/kills";
     double speed=0.5;
     int moveSpeed = 2;
-    int Hp=3000000;
+    int Hp=300;
     int killCount=0;
     boolean move = false;
     boolean shop = false;
