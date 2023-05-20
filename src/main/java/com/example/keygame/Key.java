@@ -45,7 +45,7 @@ public class Key extends Application
     String secondI = "press 2 to buy ultimate sped, it costs 100 money/kills";
     double speed=0.5;
     int moveSpeed = 2;
-    int Hp=300;
+    int Hp=3000000;
     int killCount=0;
     boolean move = false;
     boolean shop = false;
@@ -298,14 +298,15 @@ public class Key extends Application
                 enemyT.draw(gc);
 
                 enemyT.tick();
+
+                if (enemyT.hp <= 0) {
+                    enemies.remove(enemyT);
+                }
+
                 if (getD(enemyT.enemyX, playerx, enemyT.enemyY, playery) < 20) {
                     Hp -= 10;
                     enemyT.hp -= 1;
-                    if (enemyT.hp <= 0) {
 
-                        enemies.remove(enemyT);
-
-                    }
 
                     break;
                 }
@@ -336,8 +337,22 @@ public class Key extends Application
                 if(bullet1 instanceof Bomb)
                 {
                     if(((Bomb) bullet1).boom<=0){
-                        //TODO:MAKE ARRAYLIOST REMOVE AND DAMAGE
-                        continue;
+                        System.out.println("H");
+
+                        //damage all nearby enemies
+                        for(int i=0;i<enemies.size();i++)
+                        {
+                            double dist=getD(bullet1.bulletx,enemies.get(i).enemyX,bullet1.bullety,enemies.get(i).enemyY);
+                            if(dist<=Settings.bombRange){
+                                System.out.println("uuu");
+                                enemies.get(i).hp-=Settings.bombDamage;
+                                System.out.println(enemies.get(i).hp);
+                            }
+
+                        }
+                        // remove bomb
+                        bullets.remove(k);
+//                        continue;
                     }
 
                     continue;
